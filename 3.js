@@ -1,15 +1,21 @@
-function seleksiNilai (nilaiAwal,nilaiAkhir,dataArray) {
-    if (nilaiAwal >= nilaiAkhir) {
-        console.log('Nilai akhir harus lebih besar dari nilai awal') //nilai awal
+function seleksiNilai (nilaiAwal,nilaiAkhir,dataArray) { //fungsi seleksi nilai, yang memiliki 3 parameter nilaiAwal, nilaiAkhir dan dataArray
+    if (nilaiAwal >= nilaiAkhir) { //ketentuan nilai awal harus lebih kecil dari nilai akhir, jika tidak akan error
+        console.log('Nilai akhir harus lebih besar dari nilai awal') 
         return
-    } else if (dataArray.length <=5) {
-        console.log('Jumlah angka dalam dataArray harus lebih dari 5') //data aray
+    } else if (dataArray.length <=5) { //ketentuan data aray harus lebih dari 5 jika tidak maka akan error
+        console.log('Jumlah angka dalam dataArray harus lebih dari 5') 
         return
     }
-    let filterArray = dataArray.filter(x => nilaiAwal < x && nilaiAkhir > x).sort((x,y)=> x-y ) 
+    let filterArray = dataArray
+    .filter(x =>{ //filter disini digunakan untuk memanggil kembali array dengan algoritma yang bernilai true
+        return nilaiAwal < x && nilaiAkhir > x // sama dengan nilaiAwal <= x <= nilaiAkhir
+    })
+    .sort( //sort method ini untuk mengurutkan nilai yang sudah difilter
+        (x,y)=> x-y  //algoritma ini digunakan untuk mengurutkan dari nilai awal ke besar/ digit paling kecil ke digit paling besar
+        ) 
 
-    if (filterArray.length == 0) { //length dicek di browser
-        console.log('Nilai tidak ditemukan') //array tidak ada dalam rentang
+    if (filterArray.length == 0) { //pengkondisian ini digunakan ketika tidak ada data dalam array dalam nilaiAwal-nilaiAkhir maka array.length==0 maka akan muncul error
+        console.log('Nilai tidak ditemukan')
         return
     } 
     console.log(filterArray)
